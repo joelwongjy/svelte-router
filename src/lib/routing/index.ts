@@ -69,6 +69,11 @@ export function createRouting({
     // 2. match the component and render content
     matchRoute(targetPathname);
   });
+
+  // for when back button on browser is clicked
+  window.addEventListener("popstate", function () {
+    matchRoute(window.location.pathname);
+  });
 }
 
 function findAnchorTag(element: HTMLElement) {
