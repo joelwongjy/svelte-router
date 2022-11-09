@@ -1,13 +1,13 @@
 import { createRouting } from "./lib/routing";
-import A from "./routes/A.svelte";
-import B from "./routes/B.svelte";
-import C from "./routes/C.svelte";
+
+// dynamic import so each route is its own js file when built
+// import file lazily so browser loads component only when needed
 
 createRouting({
   routes: [
-    { url: "/", component: A },
-    { url: "/b", component: B },
-    { url: "/c", component: C },
+    { url: "/", component: () => import("./routes/A.svelte") },
+    { url: "/b", component: () => import("./routes/B.svelte") },
+    { url: "/c", component: () => import("./routes/C.svelte") },
   ],
   target: document.getElementById("app"),
 });
